@@ -1,0 +1,48 @@
+body {
+    text-align: center;
+    background-color: tan;
+}
+
+.sideBar {
+    background-color: teal;
+}
+
+#mainSection {
+    background-color: lightgrey;
+}
+
+.fullBar {
+    background-color: yellow;
+}
+
+.colInCol {
+    background-color: white;
+}
+
+.titleShot {
+    margin: 15px;
+    padding: 10px;
+    color: yellow;
+}
+
+#displayTime,
+#display1,
+#display2,
+#display3,
+#display4,
+#display5 {
+    display: none;
+}
+
+.noBullet {
+    list-style-type: none;
+}
+
+.answerStyle:hover {
+    background-color: red;
+    border: 2px;
+    border-color: yellow;
+    color: lightgrey;
+    background-color: black;
+    transition: .5s;
+}
