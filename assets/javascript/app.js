@@ -9,7 +9,7 @@ var clockRunning = false;
 var stopwatch = {
     time: 15,
     start: function () {
-        intervalId = setInterval(stopwatch.count, 100);
+        intervalId = setInterval(stopwatch.count, 1000);
         clockRunning = true;
         var converted = stopwatch.timeConverter(stopwatch.time);
     },
@@ -44,19 +44,19 @@ var stopwatch = {
 function checkAnswerRight() {
     totalRight++;
     $("#totalRight").text(totalRight);
+    clearInterval(intervalId);
 }
-
 function checkAnswerWrong() {
     totalWrong++;
     $("#totalWrong").text(totalWrong);
+    clearInterval(intervalId);
 }
-
 function resetTimer() {
     stopwatch.time = 15;
     var converted = stopwatch.timeConverter(stopwatch.time);
     $("#displayTime").text(converted);
+    stopwatch.start();
 }
-
 function resetMatch() {
     totalRight = 0; $("#totalRight").text(totalRight);
     totalWrong = 0; $("#totalWrong").text(totalWrong);
@@ -71,6 +71,7 @@ function resetMatch() {
 $("#startButton").on("click", function () {
     $("#displayTime, #display1").show();
     $("#startButton").hide();
+    stopwatch.start();
 });
 $("#restartButton").on("click", function () {
     $("#displayTime, #display1").show();
@@ -78,28 +79,21 @@ $("#restartButton").on("click", function () {
     resetMatch();
 });
 
-//Starting & Restarting the Game
-$("#startButton").on("click", stopwatch.start);
-$("#restartButton").on("click", stopwatch.start);
-
 //Answers: Batch One
 $("#answerChoice-A1, #answerChoice-A2, #answerChoice-A3, #answerChoice-A4").on("click", function () {
     if ($(this).attr("data-name") === "Mild High Club") {
         checkAnswerRight();
         $("#display1, #displayTime").hide();
         $("#display1Right").show();
-        clearInterval(intervalId);
     } else {
         checkAnswerWrong();
         $("#display1, #displayTime").hide();
         $("#display1Wrong").show();
-        clearInterval(intervalId);
     }
     setTimeout(function () {
         $("#display1, #display1Right, #display1Wrong").hide();
         $("#display2, #displayTime").show();
         resetTimer();
-        stopwatch.start()
     }, 2000);
 });
 
@@ -109,19 +103,16 @@ $("#answerChoice-B1, #answerChoice-B2, #answerChoice-B3, #answerChoice-B4").on("
         checkAnswerRight();
         $("#display2, #displayTime").hide();
         $("#display2Right").show();
-        clearInterval(intervalId);
     } else {
         checkAnswerWrong();
         $("#display2, #displayTime").hide();
         $("#display2Wrong").show();
-        clearInterval(intervalId);
     }
     //Change to correct ot incorrect answer screen
     setTimeout(function () {
         $("#display2, #display2Right, #display2Wrong").hide();
         $("#display3, #displayTime").show();
         resetTimer();
-        stopwatch.start();
     }, 2000);
 });
 
@@ -131,19 +122,16 @@ $("#answerChoice-C1, #answerChoice-C2, #answerChoice-C3, #answerChoice-C4").on("
         checkAnswerRight();
         $("#display3, #displayTime").hide();
         $("#display3Right").show();
-        clearInterval(intervalId);
     } else {
         checkAnswerWrong();
         $("#display3, #displayTime").hide();
         $("#display3Wrong").show();
-        clearInterval(intervalId);
     }
     //Change to correct ot incorrect answer screen
     setTimeout(function () {
         $("#display3, #display3Right, #display3Wrong").hide();
         $("#display4, #displayTime").show();
         resetTimer();
-        stopwatch.start()
     }, 2000);
 });
 
@@ -153,22 +141,16 @@ $("#answerChoice-D1, #answerChoice-D2, #answerChoice-D3, #answerChoice-D4").on("
         checkAnswerRight();
         $("#display4, #displayTime").hide();
         $("#display4Right").show();
-        clearInterval(intervalId);
     } else {
         checkAnswerWrong();
         $("#display4, #displayTime").hide();
         $("#display4Wrong").show();
-        clearInterval(intervalId);
     }
     //Change to correct ot incorrect answer screen
     setTimeout(function () {
         $("#display4, #display4Right, #display4Wrong").hide();
         $("#display5, #restartButton").show();
-        // resetTimer();
-        // stopwatch.start()
     }, 2000);
 });
 
-
-//Stop clockRunning once I get to final screen and/or when correct answer is chosen
-//Add Event Listener to say that time is out when time is equal to zero
+//Add Event Listener to say that time is out when time is equal to zero and set separate screen

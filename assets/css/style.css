@@ -38,7 +38,12 @@ body {
 #display3Right,
 #display3Wrong,
 #display4Right,
-#display4Wrong {
+#display4Wrong,
+#display1Time,
+#display2Time,
+#display3Time,
+#display4Time
+ {
     display: none;
 }
 
