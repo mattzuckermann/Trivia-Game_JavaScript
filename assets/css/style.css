@@ -42,6 +42,10 @@ body {
     display: none;
 }
 
+hr {
+    width: 200px;
+}
+
 .answerStyle:hover {
     background-color: red;
     border: 2px;
