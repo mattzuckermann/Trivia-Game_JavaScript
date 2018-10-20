@@ -1,7 +1,9 @@
+//=========
 //VARIABLES
 //=========
-var totalRight = 0
-var answers = ["Mild High Club", "Slowdive", "Kevin Abstract", "A ghost is birthed"]
+
+var totalRight = 0;
+var totalWrong = 0;
 var intervalId;
 var clockRunning = false;
 var stopwatch = {
@@ -37,25 +39,36 @@ var stopwatch = {
         return minutes + ":" + seconds;
     }
 }
+
 //=========
 //FUNCTIONS
 //=========
 
-//for loop for checking if answer was correct
-function checkAnswer() {
-    alert("You got it right!");
-    this.totalRight++;
+function checkAnswerRight() {
+    totalRight++;
     $("#totalRight").text(totalRight);
 }
 
-function reset() {
-    stopwatch.time = 15;
-
+function checkAnswerWrong() {
+    totalWrong++;
+    $("#totalWrong").text(totalWrong);
 }
 
-//==============================
-//EVENT LISTENERS AND ACTIVATORS
-//==============================
+function resetTimer() {
+    stopwatch.time = 15;
+    var converted = stopwatch.timeConverter(stopwatch.time);
+    $("#displayTime").text(converted);
+}
+
+function resetMatch() {
+    totalRight = 0; $("#totalRight").text(totalRight);
+    totalWrong = 0; $("#totalWrong").text(totalWrong);
+    resetTimer();
+}
+
+//===============
+//EVENT LISTENERS
+//===============
 
 //Event Listeners for Starting and Restarting the Game
 $("#startButton").on("click", function () {
@@ -65,6 +78,7 @@ $("#startButton").on("click", function () {
 $("#restartButton").on("click", function () {
     $("#displayTime, #display1").show();
     $("#display5, #restartButton").hide();
+    resetMatch();
 });
 
 //Starting & Restarting the Game
@@ -74,35 +88,78 @@ $("#restartButton").on("click", stopwatch.start);
 //Answers: Batch One
 $("#answerChoice-A1, #answerChoice-A2, #answerChoice-A3, #answerChoice-A4").on("click", function () {
     if ($(this).attr("data-name") === "Mild High Club") {
-        checkAnswer();
+        checkAnswerRight();
+        $("#display1, #displayTime").hide();
+        $("#display1Right").show();
+    } else {
+        checkAnswerWrong();
+        $("#display1, #displayTime").hide();
+        $("#display1Wrong").show();
     }
-    $("#display1").hide();
-    $("#display2").show();
+    setTimeout(function () {
+        $("#display1, #display1Right, #display1Wrong").hide();
+        $("#display2, #displayTime").show();
+        resetTimer();
+    }, 2000);
 });
 
 //Answers: Batch Two
 $("#answerChoice-B1, #answerChoice-B2, #answerChoice-B3, #answerChoice-B4").on("click", function () {
     if ($(this).attr("data-name") === "Slowdive") {
-        checkAnswer();
+        checkAnswerRight();
+        $("#display2, #displayTime").hide();
+        $("#display2Right").show();
+    } else {
+        checkAnswerWrong();
+        $("#display2, #displayTime").hide();
+        $("#display2Wrong").show();
     }
-    $("#display2").hide();
-    $("#display3").show();
+    //Change to correct ot incorrect answer screen
+    setTimeout(function () {
+        $("#display2, #display2Right, #display2Wrong").hide();
+        $("#display3, #displayTime").show();
+        resetTimer();
+    }, 2000);
 });
 
 //Answers: Batch Three
 $("#answerChoice-C1, #answerChoice-C2, #answerChoice-C3, #answerChoice-C4").on("click", function () {
     if ($(this).attr("data-name") === "Kevin Abstract") {
-        checkAnswer();
+        checkAnswerRight();
+        $("#display3, #displayTime").hide();
+        $("#display3Right").show();
+    } else {
+        checkAnswerWrong();
+        $("#display3, #displayTime").hide();
+        $("#display3Wrong").show();
     }
-    $("#display3").hide();
-    $("#display4").show();
+    //Change to correct ot incorrect answer screen
+    setTimeout(function () {
+        $("#display3, #display3Right, #display3Wrong").hide();
+        $("#display4, #displayTime").show();
+        resetTimer();
+    }, 2000);
 });
 
 //Answers: Batch Four
 $("#answerChoice-D1, #answerChoice-D2, #answerChoice-D3, #answerChoice-D4").on("click", function () {
     if ($(this).attr("data-name") === "A ghost is birthed") {
-        checkAnswer();
+        checkAnswerRight();
+        $("#display4, #displayTime").hide();
+        $("#display4Right").show();
+    } else {
+        checkAnswerWrong();
+        $("#display4, #displayTime").hide();
+        $("#display4Wrong").show();
     }
-    $("#display4, #displayTime").hide();
-    $("#display5, #restartButton").show();
+    //Change to correct ot incorrect answer screen
+    setTimeout(function () {
+        $("#display4, #display4Right, #display4Wrong").hide();
+        $("#display5, #restartButton").show();
+        resetTimer();
+    }, 2000);
 });
+
+
+//Stop clockRunning once I get to final screen and when correct answer is chosen
+//Add Event Listener to say that time is out when time is equal to zero

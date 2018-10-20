@@ -30,12 +30,16 @@ body {
 #display2,
 #display3,
 #display4,
-#display5 {
+#display5,
+#display1Right,
+#display1Wrong,
+#display2Right,
+#display2Wrong,
+#display3Right,
+#display3Wrong,
+#display4Right,
+#display4Wrong {
     display: none;
-}
-
-.noBullet {
-    list-style-type: none;
 }
 
 .answerStyle:hover {
