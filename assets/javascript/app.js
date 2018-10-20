@@ -9,7 +9,7 @@ var clockRunning = false;
 var stopwatch = {
     time: 15,
     start: function () {
-        intervalId = setInterval(stopwatch.count, 1000);
+        intervalId = setInterval(stopwatch.count, 100);
         clockRunning = true;
         var converted = stopwatch.timeConverter(stopwatch.time);
     },
@@ -20,6 +20,16 @@ var stopwatch = {
             console.log(converted);
             $("#displayTime").text(converted);
         }
+        // if (stopwatch.time === 0) {
+        //     $("#display1, #displayTime").hide();
+        //     $("#display1Time").show();
+        //     clearInterval(intervalId);
+        //     setTimeout(function () {
+        //         $("#display1Time").hide();
+        //         $("#display2, #displayTime").show();
+        //         resetTimer();
+        //     }, 2000);
+        // }
     },
     timeConverter: function (t) {
         var minutes = Math.floor(t / 60);
