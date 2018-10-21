@@ -9,7 +9,7 @@ var clockRunning = false;
 var stopwatch = {
     time: 15,
     start: function () {
-        intervalId = setInterval(stopwatch.count, 100);
+        intervalId = setInterval(stopwatch.count, 1000);
         clockRunning = true;
         var converted = stopwatch.timeConverter(stopwatch.time);
     },
@@ -20,16 +20,49 @@ var stopwatch = {
             console.log(converted);
             $("#displayTime").text(converted);
         }
-        // if (stopwatch.time === 0) {
-        //     $("#display1, #displayTime").hide();
-        //     $("#display1Time").show();
-        //     clearInterval(intervalId);
-        //     setTimeout(function () {
-        //         $("#display1Time").hide();
-        //         $("#display2, #displayTime").show();
-        //         resetTimer();
-        //     }, 2000);
-        // }
+        if (stopwatch.time === 0 && $("#display1").is(":visible")) {
+            checkAnswerWrong();
+            $("#display1, #displayTime").hide();
+            $("#display1Time").show();
+            clearInterval(intervalId);
+            setTimeout(function () {
+                $("#display1Time").hide();
+                $("#display2, #displayTime").show();
+                resetTimer();
+            }, 2000);
+        }
+        if (stopwatch.time === 0 && $("#display2").is(":visible")) {
+            checkAnswerWrong();
+            $("#display2, #displayTime").hide();
+            $("#display2Time").show();
+            clearInterval(intervalId);
+            setTimeout(function () {
+                $("#display2Time").hide();
+                $("#display3, #displayTime").show();
+                resetTimer();
+            }, 2000);
+        }
+        if (stopwatch.time === 0 && $("#display3").is(":visible")) {
+            checkAnswerWrong();
+            $("#display3, #displayTime").hide();
+            $("#display3Time").show();
+            clearInterval(intervalId);
+            setTimeout(function () {
+                $("#display3Time").hide();
+                $("#display4, #displayTime").show();
+                resetTimer();
+            }, 2000);
+        }
+        if (stopwatch.time === 0 && $("#display4").is(":visible")) {
+            checkAnswerWrong();
+            $("#display4, #displayTime").hide();
+            $("#display4Time").show();
+            clearInterval(intervalId);
+            setTimeout(function () {
+                $("#display4Time").hide();
+                $("#display5, #restartButton").show();
+            }, 2000);
+        }
     },
     timeConverter: function (t) {
         var minutes = Math.floor(t / 60);
