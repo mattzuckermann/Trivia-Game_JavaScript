@@ -4,12 +4,13 @@
 
 var totalRight = 0;
 var totalWrong = 0;
+var totalUnanswered = 0;
 var intervalId;
 var clockRunning = false;
 var stopwatch = {
     time: 15,
     start: function () {
-        intervalId = setInterval(stopwatch.count, 1000);
+        intervalId = setInterval(stopwatch.count, 100);
         clockRunning = true;
         var converted = stopwatch.timeConverter(stopwatch.time);
     },
@@ -21,10 +22,9 @@ var stopwatch = {
             $("#displayTime").text(converted);
         }
         if (stopwatch.time === 0 && $("#display1").is(":visible")) {
-            checkAnswerWrong();
+            checkAnswerUnanswered();
             $("#display1, #displayTime").hide();
             $("#display1Time").show();
-            clearInterval(intervalId);
             setTimeout(function () {
                 $("#display1Time").hide();
                 $("#display2, #displayTime").show();
@@ -32,10 +32,9 @@ var stopwatch = {
             }, 2000);
         }
         if (stopwatch.time === 0 && $("#display2").is(":visible")) {
-            checkAnswerWrong();
+            checkAnswerUnanswered();
             $("#display2, #displayTime").hide();
             $("#display2Time").show();
-            clearInterval(intervalId);
             setTimeout(function () {
                 $("#display2Time").hide();
                 $("#display3, #displayTime").show();
@@ -43,10 +42,9 @@ var stopwatch = {
             }, 2000);
         }
         if (stopwatch.time === 0 && $("#display3").is(":visible")) {
-            checkAnswerWrong();
+            checkAnswerUnanswered();
             $("#display3, #displayTime").hide();
             $("#display3Time").show();
-            clearInterval(intervalId);
             setTimeout(function () {
                 $("#display3Time").hide();
                 $("#display4, #displayTime").show();
@@ -54,10 +52,9 @@ var stopwatch = {
             }, 2000);
         }
         if (stopwatch.time === 0 && $("#display4").is(":visible")) {
-            checkAnswerWrong();
+            checkAnswerUnanswered();
             $("#display4, #displayTime").hide();
             $("#display4Time").show();
-            clearInterval(intervalId);
             setTimeout(function () {
                 $("#display4Time").hide();
                 $("#display5, #restartButton").show();
@@ -94,6 +91,11 @@ function checkAnswerWrong() {
     $("#totalWrong").text(totalWrong);
     clearInterval(intervalId);
 }
+function checkAnswerUnanswered() {
+    totalUnanswered++;
+    $("#totalUnanswered").text(totalUnanswered);
+    clearInterval(intervalId);
+}
 function resetTimer() {
     stopwatch.time = 15;
     var converted = stopwatch.timeConverter(stopwatch.time);
@@ -103,6 +105,7 @@ function resetTimer() {
 function resetMatch() {
     totalRight = 0; $("#totalRight").text(totalRight);
     totalWrong = 0; $("#totalWrong").text(totalWrong);
+    totalUnanswered = 0; $("#totalUnanswered").text(totalUnanswered);
     resetTimer();
 }
 
@@ -133,6 +136,7 @@ $("#answerChoice-A1, #answerChoice-A2, #answerChoice-A3, #answerChoice-A4").on("
         $("#display1, #displayTime").hide();
         $("#display1Wrong").show();
     }
+    //Change to following question
     setTimeout(function () {
         $("#display1, #display1Right, #display1Wrong").hide();
         $("#display2, #displayTime").show();
@@ -151,7 +155,7 @@ $("#answerChoice-B1, #answerChoice-B2, #answerChoice-B3, #answerChoice-B4").on("
         $("#display2, #displayTime").hide();
         $("#display2Wrong").show();
     }
-    //Change to correct ot incorrect answer screen
+    //Change to following question
     setTimeout(function () {
         $("#display2, #display2Right, #display2Wrong").hide();
         $("#display3, #displayTime").show();
@@ -170,7 +174,7 @@ $("#answerChoice-C1, #answerChoice-C2, #answerChoice-C3, #answerChoice-C4").on("
         $("#display3, #displayTime").hide();
         $("#display3Wrong").show();
     }
-    //Change to correct ot incorrect answer screen
+    //Change to following question
     setTimeout(function () {
         $("#display3, #display3Right, #display3Wrong").hide();
         $("#display4, #displayTime").show();
@@ -189,11 +193,9 @@ $("#answerChoice-D1, #answerChoice-D2, #answerChoice-D3, #answerChoice-D4").on("
         $("#display4, #displayTime").hide();
         $("#display4Wrong").show();
     }
-    //Change to correct ot incorrect answer screen
+    //Change to following question
     setTimeout(function () {
         $("#display4, #display4Right, #display4Wrong").hide();
         $("#display5, #restartButton").show();
     }, 2000);
 });
-
-//Add Event Listener to say that time is out when time is equal to zero and set separate screen
