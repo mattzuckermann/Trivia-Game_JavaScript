@@ -4,7 +4,7 @@
 
 ## Purpose of App:
 
-To flip through multiple temporary HTML pages that have event listeners on each answer for the given question.
+To flip through multiple temporary HTML pages that have event listeners on each answer for the given question, creating a basic trivia layout for a question/answer format game.
 
 ---
 
