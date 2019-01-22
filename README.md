@@ -16,4 +16,6 @@ Simply click "Start!" to begin and select the (upon hovering) highlighted answer
 
 ## GIF Demonstration of App:
 
-![](https://media.giphy.com/media/iDMUfqfZlPtX9kwPSz/giphy.gif)
+<img src="https://media.giphy.com/media/iDMUfqfZlPtX9kwPSz/giphy.gif" alt="Gif Demonstration of App" width=100%>
+
+---
