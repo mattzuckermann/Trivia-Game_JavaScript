@@ -16,3 +16,4 @@ Simply click "Start!" to begin and select the (upon hovering) highlighted answer
 
 ## GIF Demonstration of App:
 
+![](https://media.giphy.com/media/iDMUfqfZlPtX9kwPSz/giphy.gif)
